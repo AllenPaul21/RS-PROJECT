@@ -14,7 +14,7 @@ Tobechi Obinwanne, Patrick Brandtner
 ##  Overview
 This project replicates the key findings of the paper, which proposes a 
 **hybrid machine learning recommendation system** that combines:
-- **Apriori Algorithm** — to discover product associations
+- **Apriori/FP-Growth Algorithm** — to discover product associations
 - **K-Means Clustering** — to identify customer demographic profiles 
 linked to those associations
 
@@ -36,20 +36,130 @@ are connected to each association?*
 
 ##  Methods Used
 
-### Step 1 — Association Rule Mining (Apriori)
+### Step 1 — Data Preprocessing
+- Cleaned raw Online Retail data
+- Removed missing values and duplicates
+- Prepared basket format for association rule mining
+- Extracted customer demographics for clustering
+
+### Step 2 — Finding Optimal K for Clustering
+- Used **Elbow Method** and **Silhouette Score**
+- Both methods confirmed **optimal k = 4**
+- Silhouette Score was highest at k=4 (~0.39)
+
+### Step 3 — Association Rule Mining
+- Applied **FP-Growth Algorithm**
 - Minimum support: 5%
 - Minimum confidence: 55%
-- Generates product association rules with Support, Confidence, 
-Rule Support, and Lift
+- Generated 11 product association rules
 
-### Step 2 — Customer Profiling (K-Means Clustering)
-- Cluster size: 3 per rule
-- Only clusters with size > 30% are accepted
-- Demographic variables: Designation, Customer Groups, State, Order Type
+### Step 4 — Customer Segmentation (K-Means)
+- Applied K-Means with k=4
+- 4 customer segments identified:
+  - Segment 0: 72.4% of customers (dominant)
+  - Segment 1: 7.1% of customers
+  - Segment 2: 9.2% of customers
+  - Segment 3: 11.3% of customers
 
-### Step 3 — Profile-Rule Mapping
-- Maps unique customer profiles to association rules
-- Strong (s) and Weak (w) connections identified
+### Step 5 — Profile-Rule Mapping
+- Mapped unique customer profiles to association rules
+- Strong (red) and Weak (gray) connections identified
+- Profile-G connected to most rules (7 rules)
+- Profile-A and Profile-F each connected to 6 rules
+
+---
+
+##  Results
+
+### Optimal K Analysis
+Elbow Method and Silhouette Score both confirm **k=4** as optimal.
+
+![Optimal K Analysis](results/optimal_k_analysis.png)
+
+---
+
+### Customer Segments (k=4)
+4 customer segments were identified using K-Means clustering.
+
+![Customer Segments](results/customer_segments.png)
+
+| Segment | % of Customers |
+|---------|---------------|
+| 0 | 72.4% (dominant segment) |
+| 1 | 7.1% |
+| 2 | 9.2% |
+| 3 | 11.3% |
+
+---
+
+### Table 1 — Product Association Rules
+11 association rules generated using FP-Growth algorithm.
+
+See full table: [results/rules_fpgrowth.csv](results/rules_fpgrowth.csv)
+
+---
+
+### Table 2 — Customer Profile Summary
+Final customer profiles mapped to association rules.
+
+See full table: [results/final_summary_profiles.csv](results/final_summary_profiles.csv)
+
+---
+
+### Figure 3 — Customer Profile Association Rule Mapping
+#### Version 1: Replication Results
+Shows 4 unique customer profiles (B, D, F, I) connected to 11 rules.
+- **Red lines** = Strong connections
+- **Pink lines** = Weak connections
+
+![Figure 3 Replication](results/figure3_replication_results.png)
+
+#### Version 2: Enhanced Network Visualization
+Shows 3 customer profiles (A, B, C) with clearer strong/weak connections.
+- **Red lines** = Strong connections
+- **Gray dashed lines** = Weak connections
+
+![Figure 3 Network](results/figure3_network_visualization.png)
+
+---
+
+### Enhanced Profile Connectivity
+Shows how many rules each customer profile is connected to.
+- **Profile-G** — connected to 7 rules (most connected)
+- **Profile-A, Profile-F** — connected to 6 rules each
+- **Profile-E** — connected to 5 rules
+- **Profile-M, Profile-H** — strong connections (red)
+
+![Enhanced Profiles](results/enhanced_profiles_connectivity.png)
+
+---
+
+##  Key Findings
+
+| Finding | Description | Result |
+|---------|-------------|--------|
+| Optimal K | Best number of clusters confirmed | ✅ k=4 (Elbow + Silhouette) |
+| Customer Segments | 4 segments identified | ✅ Confirmed |
+| Dominant Segment | Segment 0 contains most customers | ✅ 72.4% |
+| Product Associations | 11 association rules generated | ✅ Confirmed |
+| Customer Profiles | Multiple unique profiles identified | ✅ Confirmed |
+| Profile-Rule Mapping | Network graph successfully replicated | ✅ Confirmed |
+
+---
+
+##  Differences from Original Paper
+
+| Aspect | Original Paper | Our Replication |
+|--------|---------------|-----------------|
+| Dataset | Austrian hygiene retailer (private) | Online Retail (UCI, public) |
+| Algorithm | Apriori | FP-Growth (more efficient) |
+| Demographic variables | Designation, Customer Groups, State, Order Type | Available columns in dataset |
+| Business context | B2B hygiene retailer | General online retail |
+| Unique profiles | 4 profiles (A, B, C, D) | Multiple profiles (A–O) |
+
+The original dataset used in the paper is **not publicly available** 
+(proprietary Austrian retailer data). We used the **Online Retail dataset** 
+from UCI as a substitute to replicate the methodology.
 
 ---
 
@@ -60,18 +170,22 @@ product-recommendation-replication/
 ├── README.md
 │
 ├── research_paper/
-│   └── Paper1_main.pdf                  ← Original paper
+│   └── Paper1_main.pdf                      ← Original paper
 │
 ├── dataset/
-│   └── OnlineRetail.xlsx                ← Dataset used
+│   └── OnlineRetail.xlsx                    ← Dataset used
 │
 ├── code/
-│   └── preprocessing.ipynb              ← Main code notebook
+│   └── preprocessing.ipynb                  ← Main code notebook
 │
 └── results/
-    ├── figure3_replication_results.png  ← Network graph
-    ├── table1_association_rules.csv     ← Association rules
-    └── table2_final_profiles.csv        ← Customer profiles
+    ├── figure3_replication_results.png      ← Fig 3: Replication network
+    ├── figure3_network_visualization.png    ← Fig 3: Enhanced network
+    ├── enhanced_profiles_connectivity.png   ← Profile-rule connectivity
+    ├── customer_segments.png                ← K-Means segments (k=4)
+    ├── optimal_k_analysis.png               ← Elbow + Silhouette plot
+    ├── rules_fpgrowth.csv                   ← Association rules table
+    └── final_summary_profiles.csv           ← Customer profiles table
 ```
 
 ---
@@ -81,8 +195,8 @@ product-recommendation-replication/
 ### Prerequisites
 - Python 3
 - Jupyter Notebook or Google Colab
-- Libraries: `pandas`, `mlxtend`, `scikit-learn`, `matplotlib`, 
-`networkx`, `openpyxl`
+- Libraries: `pandas`, `mlxtend`, `scikit-learn`, 
+`matplotlib`, `networkx`, `openpyxl`
 
 ### Install dependencies
 ```bash
@@ -97,65 +211,9 @@ pip install pandas mlxtend scikit-learn matplotlib networkx openpyxl
 
 ---
 
-##  Results
-
-### Table 1 — Product Association Rules
-11 association rules were generated with minimum confidence of 55% 
-and minimum support of 5%.
-
-See full table: [results/table1_association_rules.csv](results/table1_association_rules.csv)
-
-| Rule ID | Antecedent 1 | Antecedent 2 | Consequent | Confidence % | Lift |
-|---------|-------------|-------------|------------|-------------|------|
-| 8 | 947 | 993 | 13 | 79.251 | 2.34 |
-| 9 | 947 | 660 | 13 | 79.014 | 2.33 |
-| 1 | 947 | - | 13 | 77.087 | 2.276 |
-| 3 | 562 | 993 | 660 | 65.589 | 2.149 |
-| ... | ... | ... | ... | ... | ... |
-
-### Table 2 — Customer Profile Clusters
-4 unique customer profiles (A, B, C, D) were identified across 
-16 valid profile-rule mappings.
-
-See full table: [results/table2_final_profiles.csv](results/table2_final_profiles.csv)
-
-### Figure 3 — Customer Profile Association Rule Mapping
-The network graph below shows which customer profiles are strongly 
-(red lines) or weakly connected to each association rule.
-
-![Figure 3](results/figure3_replication_results.png)
-
----
-
-##  Key Findings
-
-| Finding | Description | Result |
-|---------|-------------|--------|
-| Product Associations | 11 association rules generated | ✅ Confirmed |
-| Top Rule | Rule 8: Product 947 + 993 → 13 (Confidence: 79.25%) | ✅ Confirmed |
-| Unique Customer Profiles | 4 unique profiles (A, B, C, D) identified | ✅ Confirmed |
-| Dominant Profile | Profile-A strongly connected to most rules | ✅ Confirmed |
-| Profile-Rule Mapping | Network graph matches paper's Fig. 3 | ✅ Confirmed |
-
----
-
-##  Differences from Original Paper
-
-| Aspect | Original Paper | Our Replication |
-|--------|---------------|-----------------|
-| Dataset | Austrian hygiene retailer (private) | Online Retail (UCI, public) |
-| Demographic variables | Designation, Customer Groups, State, Order Type | Available columns in dataset |
-| Business context | B2B hygiene retailer | General online retail |
-
-The original dataset used in the paper is **not publicly available** 
-(proprietary Austrian retailer data). We used the **Online Retail dataset** 
-from UCI as a substitute to replicate the methodology.
-
----
-
-## 📚 Dependencies
+##  Dependencies
 - `pandas` — data processing
-- `mlxtend` — Apriori algorithm
+- `mlxtend` — FP-Growth / Apriori algorithm
 - `scikit-learn` — K-Means clustering
 - `matplotlib` — plotting
 - `networkx` — network graph (Figure 3)
