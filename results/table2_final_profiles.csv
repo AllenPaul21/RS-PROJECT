@@ -1,0 +1,12 @@
+Rule ID,Unique Profile,Designation_ID,Customer_Group_ID,State_ID,Order_Type_ID,Frequency_ID,Spending_ID,Connection,Cluster_Percentage
+1,Profile-B,1,8,8,1,2,0,s,56.6
+2,Profile-B,1,8,8,1,2,2,s,59.9
+3,Profile-B,1,8,8,1,2,0,s,58.9
+4,Profile-B,1,8,8,1,2,0,s,58.9
+5,Profile-D,2,8,8,1,2,2,s,61.2
+6,Profile-F,2,6,8,1,2,2,s,54.1
+7,Profile-D,2,8,8,1,2,0,s,58.2
+8,Profile-B,1,8,8,1,2,0,s,58.9
+9,Profile-B,1,8,8,1,2,0,s,58.2
+10,Profile-I,2,8,11,1,2,0,s,51.9
+11,Profile-D,2,8,8,1,2,2,s,54.0
