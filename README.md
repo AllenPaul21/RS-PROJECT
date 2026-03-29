@@ -138,12 +138,12 @@ Shows how many rules each customer profile is connected to.
 
 | Finding | Description | Result |
 |---------|-------------|--------|
-| Optimal K | Best number of clusters confirmed | ✅ k=4 (Elbow + Silhouette) |
-| Customer Segments | 4 segments identified | ✅ Confirmed |
-| Dominant Segment | Segment 0 contains most customers | ✅ 72.4% |
-| Product Associations | 11 association rules generated | ✅ Confirmed |
-| Customer Profiles | Multiple unique profiles identified | ✅ Confirmed |
-| Profile-Rule Mapping | Network graph successfully replicated | ✅ Confirmed |
+| Optimal K | Best number of clusters confirmed |  k=4 (Elbow + Silhouette) |
+| Customer Segments | 4 segments identified |  Confirmed |
+| Dominant Segment | Segment 0 contains most customers |  72.4% |
+| Product Associations | 11 association rules generated |  Confirmed |
+| Customer Profiles | Multiple unique profiles identified |  Confirmed |
+| Profile-Rule Mapping | Network graph successfully replicated |  Confirmed |
 
 ---
 
