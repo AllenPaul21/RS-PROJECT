@@ -1,11 +1,10 @@
-# Product Recommendation System Replication
+# "Design and Implementation of a Product Recommendation System with Association and Clustering Algorithms"
 
 [![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Jupyter](https://img.shields.io/badge/jupyter-notebook-orange.svg)](https://jupyter.org/)
 [![ML](https://img.shields.io/badge/machine-learning-red.svg)](https://scikit-learn.org/)
 
-> **Replication Study:** "Design and Implementation of a Product Recommendation System with Association and Clustering Algorithms"
 
 ---
 
