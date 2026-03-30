@@ -146,8 +146,8 @@ After mapping association rules to customer segments, 4 unique customer profiles
 
 | Profile | Rules Connected | Designation | Order Type | Frequency | Spending |
 |---------|----------------|-------------|------------|-----------|----------|
-| **Profile-B** | 6 | Medium | Sales Rep | High | Low |
-| **Profile-D** | 3 | High | Sales Rep | High | High |
+| **Profile-A** | 6 | Medium | Sales Rep | High | Low |
+| **Profile-B** | 3 | High | Sales Rep | High | High |
 | **Profile-F** | 1 | High | Sales Rep | High | High |
 | **Profile-I** | 1 | High | Sales Rep | High | Low |
 
