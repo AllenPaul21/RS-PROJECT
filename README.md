@@ -61,38 +61,38 @@ The system answers:
 - Extract customer demographics for clustering
 
 ### Step 2 — Finding Optimal K for Clustering
-- **Elbow Method** — Plotting inertia for k=2 to 8
-- **Silhouette Score** — Evaluating cluster quality
-- **Result:** Optimal k = 4 confirmed by both methods
+- **Elbow Method** — Plotting inertia for k=2 to 8 to identify the bend point where additional clusters provide diminishing returns
+- **Silhouette Score** — Measuring how similar points are to their own cluster versus other clusters (higher score indicates better-defined clusters)
+- **Result:** Both methods confirmed optimal k = 4 (silhouette score: 0.390), indicating that 4 customer segments provide the most meaningful grouping without over-segmenting the data
 
 ### Step 3 — Association Rule Mining
 - **Algorithm:** Apriori (following paper methodology)
-- **Minimum Support:** 2%
-- **Minimum Confidence:** 55%
-- **Rules Generated:** 26 rules
-- **Lift Range:** 6.31 - 24.03
-- **Confidence Range:** 55.4% - 89.4%
+- **Minimum Support:** 2% (products must appear together in at least 2% of transactions)
+- **Minimum Confidence:** 55% (when customers buy antecedent products, 55% confidence they will also buy consequent products)
+- **Rules Generated:** 26 association rules
+- **Lift Range:** 6.31 - 24.03 (lift > 1 indicates positive correlation; values > 10 indicate very strong associations)
 
 ### Step 4 — Customer Segmentation (K-Means)
 - **Clusters:** k=4 (optimal from Step 2)
-- **Features:** 7 demographic and behavioral variables
-- **Segments Identified:** 4 distinct customer groups
+- **Features:** 7 demographic and behavioral variables (designation, customer group, region, order type, frequency, spending, diversity)
+- **Segments Identified:** 4 distinct customer groups with different purchasing behaviors
 
 ### Step 5 — Profile-Rule Mapping
-- **Mapping:** Connect customer profiles to association rules
-- **Connections:** Strong (dominant cluster) and Weak (secondary cluster)
-- **Visualization:** Network graph (Figure 3)
+- **Mapping:** Connect customer profiles to association rules based on purchasing patterns
+- **Connections:** Strong (dominant cluster) and Weak (secondary cluster) connections
+- **Visualization:** Network graph (Figure 3) showing relationships between rules and customer profiles
 
 ---
 
 ## Results
 
 ### Optimal K Analysis
-Elbow Method and Silhouette Score both confirm **k=4** as optimal.
+The Elbow Method shows diminishing returns after k=4, while the Silhouette Score peaks at k=4 with a score of 0.390, confirming that 4 customer segments is the optimal number for this dataset.
 
 ![Optimal K Analysis](results/optimal_k_analysis.png)
 
 ### Customer Segments (k=4)
+K-Means clustering identified 4 distinct customer segments based on purchasing behavior and demographics. Segment 0 represents the largest group (72.4% of customers), characterized by small volume purchases and low spending.
 
 | Segment | % of Customers | Designation | Region | Order Type | Frequency | Spending |
 |---------|---------------|-------------|--------|------------|-----------|----------|
@@ -101,11 +101,15 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 | **Segment 2** | 9.2% | Medium Volume | Other | Sales Rep | Low | High |
 | **Segment 3** | 11.3% | Medium Volume | UK_West | Web | High | High |
 
+**What this shows:** The dominant customer base (72.4%) makes small, infrequent purchases through sales representatives, while a smaller group of high-volume, high-spending customers use automated ordering systems.
+
 ![Customer Segments](results/customer_segments.png)
 
 ---
 
 ### Table 1: Product Association Rules
+
+The Apriori algorithm generated 26 association rules showing which products are frequently purchased together. Rules with high confidence and lift indicate strong product relationships that can be used for recommendations.
 
 **26 association rules generated** with min_support=2%, min_confidence=55%.
 
@@ -124,6 +128,8 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 | 9 | 22699 | — | 22697 | 2.919 | 69.093 | 18.531 |
 | 10 | 22630 | — | 22629 | 2.288 | 68.831 | 18.120 |
 
+**What these rules show:** Products with codes 22697, 22698, and 22699 (likely a set of related items) are strongly associated, with confidence values ranging from 70-89% and very high lift values (20-24), indicating these products are almost always purchased together. This suggests they are complementary products or part of a set.
+
 **Key Statistics:**
 - **Rules with confidence > 80%:** 3 rules
 - **Rules with confidence > 70%:** 8 rules
@@ -137,6 +143,8 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 
 ### Table 2: Customer Profile Summary
 
+After mapping association rules to customer segments, 4 unique customer profiles emerged, each with distinct purchasing characteristics.
+
 | Profile | Rules Connected | Designation | Order Type | Frequency | Spending |
 |---------|----------------|-------------|------------|-----------|----------|
 | **Profile-B** | 6 | Medium | Sales Rep | High | Low |
@@ -144,11 +152,7 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 | **Profile-F** | 1 | High | Sales Rep | High | High |
 | **Profile-I** | 1 | High | Sales Rep | High | Low |
 
-**Profile Characteristics:**
-- **Profile-B (Most Connected):** Medium Volume customers using Sales Rep orders, high frequency but low spending
-- **Profile-D:** High Volume, High Spending customers using Sales Rep orders
-- **Profile-F:** High Volume, High Spending customers (similar to Profile-D but smaller group)
-- **Profile-I:** High Volume, Low Spending customers using Sales Rep orders
+**What this shows:** Profile-B (Medium Volume, Low Spending) is connected to the most rules (6), indicating these customers are most likely to benefit from product recommendations. Profiles D, F, and I represent high-volume customers with varying spending levels, each connected to fewer but still important product associations.
 
 **Full table:** [results/final_summary_profiles.csv](results/final_summary_profiles.csv)
 
@@ -156,27 +160,14 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 
 ### Figure 3: Customer Profile Association Rule Mapping
 
-Final network showing the mapping between association rules and customer profiles.
+This network visualization shows the relationships between association rules (blue squares) and customer profiles (green circles). Red lines indicate strong connections where a customer segment is the dominant group for that rule.
 
 - **11 rules** connected to **4 unique profiles**
-- **Red lines** = Strong connections (dominant clusters)
+- **Red lines** = Strong connections (dominant clusters) - these profiles are most associated with these rules
 - **Gray dashed lines** = Weak connections (secondary clusters)
-- Each rule has exactly **1 strong connection**
+- Each rule has exactly **1 strong connection**, demonstrating clear profile-rule relationships
 
 ![Figure 3 Network](results/figure3_network_visualization.png)
-
-### Enhanced Profile Connectivity
-
-Shows how many rules each customer profile is connected to:
-
-![Enhanced Profiles](results/enhanced_profiles_connectivity.png)
-
-| Profile | Rules Connected | Connection Type |
-|---------|----------------|-----------------|
-| **Profile-B** | 6 | Strong |
-| **Profile-D** | 3 | Strong |
-| **Profile-F** | 1 | Strong |
-| **Profile-I** | 1 | Strong |
 
 ---
 
@@ -208,13 +199,10 @@ Shows how many rules each customer profile is connected to:
 | **Dataset Size (Products)** | >500 | 3,665 products | 7x larger |
 | **Dataset Size (Customers)** | B2B (size not specified) | 4,338 customers | Larger sample |
 
-### Key Advantages of Our Replication:
-- **Larger dataset** (3,665 unique products vs. unspecified)
-- **Stronger association rules** (lift up to 24.03 vs. 2.34)
-- **Detailed customer profiling** with behavioral metrics
-- **Publicly available data** for reproducibility
-
 ---
+
+## Repository Structure
+
 
 ## Repository Structure
 ```
