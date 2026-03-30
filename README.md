@@ -25,11 +25,10 @@
 
 This project replicates the key findings of the paper, which proposes a **hybrid machine learning recommendation system** that combines:
 
-- **Apriori Algorithm** — Primary method for discovering product associations
-- **FP-Growth Algorithm** — Enhancement for validation and comparison
-- **K-Means Clustering** — Customer demographic profiling linked to associations
+- **Apriori Algorithm** — to discover product associations
+- **K-Means Clustering** — to identify customer demographic profiles linked to those associations
 
-### The System Answers:
+The system answers:
 > *What product associations exist, and what types of customers are connected to each association?*
 
 ---
@@ -67,20 +66,12 @@ This project replicates the key findings of the paper, which proposes a **hybrid
 - **Result:** Optimal k = 4 confirmed by both methods
 
 ### Step 3 — Association Rule Mining
-
-#### Primary Method (Apriori - Paper Replication)
 - **Algorithm:** Apriori (following paper methodology)
 - **Minimum Support:** 2%
 - **Minimum Confidence:** 55%
 - **Rules Generated:** 26 rules
 - **Lift Range:** 6.31 - 24.03
 - **Confidence Range:** 55.4% - 89.4%
-
-#### Enhanced Method (FP-Growth - Validation)
-- **Algorithm:** FP-Growth (memory-efficient alternative)
-- **Minimum Support:** 1%
-- **Rules Generated:** 218 rules
-- **Purpose:** Validate Apriori results and handle larger datasets
 
 ### Step 4 — Customer Segmentation (K-Means)
 - **Clusters:** k=4 (optimal from Step 2)
@@ -114,7 +105,7 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 
 ---
 
-### Table 1: Product Association Rules (Apriori Results)
+### Table 1: Product Association Rules
 
 **26 association rules generated** with min_support=2%, min_confidence=55%.
 
@@ -142,12 +133,6 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 
 **Full table:** [results/table1_association_rules.csv](results/table1_association_rules.csv)
 
-#### FP-Growth Validation Results:
-- **218 association rules** generated for validation
-- **Top rules** confirmed Apriori findings
-- Example: [22746, 22745] → [22748] with 90.7% confidence
-- **Results:** [results/rules_fpgrowth.csv](results/rules_fpgrowth.csv)
-
 ---
 
 ### Table 2: Customer Profile Summary
@@ -171,22 +156,14 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 
 ### Figure 3: Customer Profile Association Rule Mapping
 
-#### Version 1: Enhanced Network Visualization
-Shows 4 unique customer profiles (B, D, F, I) connected to 11 rules.
-
-- **Red lines** = Strong connections (dominant clusters)
-- **Gray dashed lines** = Weak connections (secondary clusters)
-
-![Figure 3 Network](results/figure3_network_visualization.png)
-
-#### Version 2: Replication Results
 Final network showing the mapping between association rules and customer profiles.
 
 - **11 rules** connected to **4 unique profiles**
+- **Red lines** = Strong connections (dominant clusters)
+- **Gray dashed lines** = Weak connections (secondary clusters)
 - Each rule has exactly **1 strong connection**
-- Demonstrates clear profile-rule relationships
 
-![Figure 3 Replication](results/figure3_replication_results.png)
+![Figure 3 Network](results/figure3_network_visualization.png)
 
 ### Enhanced Profile Connectivity
 
@@ -210,11 +187,10 @@ Shows how many rules each customer profile is connected to:
 | **Optimal K** | Best number of clusters confirmed | k=4 (Elbow + Silhouette) |
 | **Customer Segments** | 4 segments identified | Confirmed |
 | **Dominant Segment** | Segment 0 contains most customers | 72.4% |
-| **Product Associations (Apriori)** | 26 association rules generated | Exceeded paper's 11 rules |
+| **Product Associations** | 26 association rules generated | Exceeded paper's 11 rules |
 | **Association Quality** | Lift values | 6.31 - 24.03 (very strong) |
 | **Customer Profiles** | 4 unique profiles identified | Confirmed |
 | **Profile-Rule Mapping** | Network graph successfully replicated | Confirmed |
-| **FP-Growth Validation** | Enhanced results | 218 rules, validated Apriori |
 
 ---
 
@@ -223,9 +199,8 @@ Shows how many rules each customer profile is connected to:
 | Aspect | Original Paper | Our Replication | Improvement |
 |--------|---------------|-----------------|-------------|
 | **Dataset** | Austrian hygiene retailer (private) | Online Retail (UCI, public) | Publicly available |
-| **Primary Algorithm** | Apriori | Apriori | Replicated |
-| **Enhanced Algorithm** | Not used | FP-Growth | Validation added |
-| **Rules Generated** | 11 rules | 26 rules (Apriori) + 218 (FP-Growth) | +136% / +1881% |
+| **Algorithm** | Apriori | Apriori | Replicated |
+| **Rules Generated** | 11 rules | 26 rules | +136% |
 | **Confidence Range** | 55% - 79% | 55% - 89% | +10% higher max |
 | **Lift Range** | 1.75 - 2.34 | 6.31 - 24.03 | 10x stronger |
 | **Customer Profiles** | 4 profiles | 4 profiles | Same (more detailed) |
@@ -236,10 +211,30 @@ Shows how many rules each customer profile is connected to:
 ### Key Advantages of Our Replication:
 - **Larger dataset** (3,665 unique products vs. unspecified)
 - **Stronger association rules** (lift up to 24.03 vs. 2.34)
-- **More comprehensive analysis** with FP-Growth validation
 - **Detailed customer profiling** with behavioral metrics
 - **Publicly available data** for reproducibility
 
 ---
 
 ## Repository Structure
+product-recommendation-replication/
+│
+├── README.md ← You are here
+├── LICENSE ← MIT License
+│
+├── research_paper/
+│ └── Paper1_main.pdf ← Original research paper
+│
+├── dataset/
+│ └── OnlineRetail.xlsx ← Dataset (UCI repository)
+│
+├── code/
+│ └── preprocessing.ipynb ← Main analysis notebook
+│
+└── results/
+├── figure3_network_visualization.png ← Fig 3: Network visualization
+├── enhanced_profiles_connectivity.png ← Profile-rule connectivity
+├── customer_segments.png ← K-Means segments (k=4)
+├── optimal_k_analysis.png ← Elbow + Silhouette plot
+├── table1_association_rules.csv ← Apriori rules (26 rules)
+└── final_summary_profiles.csv ← Customer profiles table
