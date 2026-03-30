@@ -1,4 +1,4 @@
-# 🛍️ Product Recommendation System Replication
+# Product Recommendation System Replication
 
 [![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -9,7 +9,7 @@
 
 ---
 
-## 📄 Paper Information
+## Paper Information
 
 | Detail | Information |
 |--------|-------------|
@@ -21,7 +21,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This project replicates the key findings of the paper, which proposes a **hybrid machine learning recommendation system** that combines:
 
@@ -34,7 +34,7 @@ This project replicates the key findings of the paper, which proposes a **hybrid
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 **Online Retail Dataset** (`OnlineRetail.xlsx`)
 
@@ -52,19 +52,19 @@ This project replicates the key findings of the paper, which proposes a **hybrid
 
 ---
 
-## 🔬 Methods Used
+## Methods Used
 
 ### Step 1 — Data Preprocessing
-- ✅ Remove missing CustomerID values
-- ✅ Remove cancelled orders (invoices starting with 'C')
-- ✅ Remove negative quantities and unit prices
-- ✅ Prepare basket format for association rule mining
-- ✅ Extract customer demographics for clustering
+- Remove missing CustomerID values
+- Remove cancelled orders (invoices starting with 'C')
+- Remove negative quantities and unit prices
+- Prepare basket format for association rule mining
+- Extract customer demographics for clustering
 
 ### Step 2 — Finding Optimal K for Clustering
-- 📊 **Elbow Method** — Plotting inertia for k=2 to 8
-- 📈 **Silhouette Score** — Evaluating cluster quality
-- 🎯 **Result:** Optimal k = 4 confirmed by both methods
+- **Elbow Method** — Plotting inertia for k=2 to 8
+- **Silhouette Score** — Evaluating cluster quality
+- **Result:** Optimal k = 4 confirmed by both methods
 
 ### Step 3 — Association Rule Mining
 
@@ -94,7 +94,7 @@ This project replicates the key findings of the paper, which proposes a **hybrid
 
 ---
 
-## 📈 Results
+## Results
 
 ### Optimal K Analysis
 Elbow Method and Silhouette Score both confirm **k=4** as optimal.
@@ -134,11 +134,11 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 | 10 | 22630 | — | 22629 | 2.288 | 68.831 | 18.120 |
 
 **Key Statistics:**
-- 📊 **Rules with confidence > 80%:** 3 rules
-- 📊 **Rules with confidence > 70%:** 8 rules
-- 📊 **Rules with lift > 2.0:** 26 rules (100%)
-- 📊 **Confidence range:** 55.4% - 89.4%
-- 📊 **Lift range:** 6.31 - 24.03
+- **Rules with confidence > 80%:** 3 rules
+- **Rules with confidence > 70%:** 8 rules
+- **Rules with lift > 2.0:** 26 rules (100%)
+- **Confidence range:** 55.4% - 89.4%
+- **Lift range:** 6.31 - 24.03
 
 **Full table:** [results/table1_association_rules.csv](results/table1_association_rules.csv)
 
@@ -160,10 +160,10 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 | **Profile-I** | 1 | High | Sales Rep | High | Low |
 
 **Profile Characteristics:**
-- 🔵 **Profile-B (Most Connected):** Medium Volume customers using Sales Rep orders, high frequency but low spending
-- 🟢 **Profile-D:** High Volume, High Spending customers using Sales Rep orders
-- 🟡 **Profile-F:** High Volume, High Spending customers (similar to Profile-D but smaller group)
-- 🟠 **Profile-I:** High Volume, Low Spending customers using Sales Rep orders
+- **Profile-B (Most Connected):** Medium Volume customers using Sales Rep orders, high frequency but low spending
+- **Profile-D:** High Volume, High Spending customers using Sales Rep orders
+- **Profile-F:** High Volume, High Spending customers (similar to Profile-D but smaller group)
+- **Profile-I:** High Volume, Low Spending customers using Sales Rep orders
 
 **Full table:** [results/final_summary_profiles.csv](results/final_summary_profiles.csv)
 
@@ -174,8 +174,8 @@ Elbow Method and Silhouette Score both confirm **k=4** as optimal.
 #### Version 1: Enhanced Network Visualization
 Shows 4 unique customer profiles (B, D, F, I) connected to 11 rules.
 
-- 🔴 **Red lines** = Strong connections (dominant clusters)
-- ⚪ **Gray dashed lines** = Weak connections (secondary clusters)
+- **Red lines** = Strong connections (dominant clusters)
+- **Gray dashed lines** = Weak connections (secondary clusters)
 
 ![Figure 3 Network](results/figure3_network_visualization.png)
 
@@ -203,43 +203,43 @@ Shows how many rules each customer profile is connected to:
 
 ---
 
-## 🔍 Key Findings
+## Key Findings
 
 | Finding | Description | Result |
 |---------|-------------|--------|
-| ✅ **Optimal K** | Best number of clusters confirmed | k=4 (Elbow + Silhouette) |
-| ✅ **Customer Segments** | 4 segments identified | Confirmed |
-| ✅ **Dominant Segment** | Segment 0 contains most customers | 72.4% |
-| ✅ **Product Associations (Apriori)** | 26 association rules generated | Exceeded paper's 11 rules |
-| ✅ **Association Quality** | Lift values | 6.31 - 24.03 (very strong) |
-| ✅ **Customer Profiles** | 4 unique profiles identified | Confirmed |
-| ✅ **Profile-Rule Mapping** | Network graph successfully replicated | Confirmed |
-| ✅ **FP-Growth Validation** | Enhanced results | 218 rules, validated Apriori |
+| **Optimal K** | Best number of clusters confirmed | k=4 (Elbow + Silhouette) |
+| **Customer Segments** | 4 segments identified | Confirmed |
+| **Dominant Segment** | Segment 0 contains most customers | 72.4% |
+| **Product Associations (Apriori)** | 26 association rules generated | Exceeded paper's 11 rules |
+| **Association Quality** | Lift values | 6.31 - 24.03 (very strong) |
+| **Customer Profiles** | 4 unique profiles identified | Confirmed |
+| **Profile-Rule Mapping** | Network graph successfully replicated | Confirmed |
+| **FP-Growth Validation** | Enhanced results | 218 rules, validated Apriori |
 
 ---
 
-## 📊 Comparison with Original Paper
+## Comparison with Original Paper
 
 | Aspect | Original Paper | Our Replication | Improvement |
 |--------|---------------|-----------------|-------------|
 | **Dataset** | Austrian hygiene retailer (private) | Online Retail (UCI, public) | Publicly available |
-| **Primary Algorithm** | Apriori | Apriori | ✅ Replicated |
-| **Enhanced Algorithm** | Not used | FP-Growth | ✅ Validation added |
+| **Primary Algorithm** | Apriori | Apriori | Replicated |
+| **Enhanced Algorithm** | Not used | FP-Growth | Validation added |
 | **Rules Generated** | 11 rules | 26 rules (Apriori) + 218 (FP-Growth) | +136% / +1881% |
 | **Confidence Range** | 55% - 79% | 55% - 89% | +10% higher max |
 | **Lift Range** | 1.75 - 2.34 | 6.31 - 24.03 | 10x stronger |
-| **Customer Profiles** | 4 profiles | 4 profiles | ✅ Same (more detailed) |
-| **Profile-Rule Mapping** | 1 strong per rule | 1 strong per rule | ✅ Same |
+| **Customer Profiles** | 4 profiles | 4 profiles | Same (more detailed) |
+| **Profile-Rule Mapping** | 1 strong per rule | 1 strong per rule | Same |
 | **Dataset Size (Products)** | >500 | 3,665 products | 7x larger |
 | **Dataset Size (Customers)** | B2B (size not specified) | 4,338 customers | Larger sample |
 
 ### Key Advantages of Our Replication:
-- 📦 **Larger dataset** (3,665 unique products vs. unspecified)
-- 💪 **Stronger association rules** (lift up to 24.03 vs. 2.34)
-- 🔬 **More comprehensive analysis** with FP-Growth validation
-- 📊 **Detailed customer profiling** with behavioral metrics
-- 🔓 **Publicly available data** for reproducibility
+- **Larger dataset** (3,665 unique products vs. unspecified)
+- **Stronger association rules** (lift up to 24.03 vs. 2.34)
+- **More comprehensive analysis** with FP-Growth validation
+- **Detailed customer profiling** with behavioral metrics
+- **Publicly available data** for reproducibility
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
