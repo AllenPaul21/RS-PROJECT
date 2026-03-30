@@ -216,7 +216,7 @@ Shows how many rules each customer profile is connected to:
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 ```
 product-recommendation-replication/
 │
@@ -243,7 +243,7 @@ product-recommendation-replication/
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
 ### Prerequisites
 - Python 3
@@ -264,7 +264,7 @@ pip install pandas mlxtend scikit-learn matplotlib networkx openpyxl
 
 ---
 
-## 📚 Dependencies
+##  Dependencies
 - `pandas` — data processing
 - `mlxtend` — FP-Growth / Apriori algorithm
 - `scikit-learn` — K-Means clustering
