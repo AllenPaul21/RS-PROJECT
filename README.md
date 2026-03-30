@@ -216,25 +216,58 @@ Shows how many rules each customer profile is connected to:
 
 ---
 
-## Repository Structure
+## 📁 Repository Structure
+```
 product-recommendation-replication/
 │
-├── README.md ← You are here
-├── LICENSE ← MIT License
+├── README.md
 │
 ├── research_paper/
-│ └── Paper1_main.pdf ← Original research paper
+│   └── Paper1_main.pdf                      ← Original paper
 │
 ├── dataset/
-│ └── OnlineRetail.xlsx ← Dataset (UCI repository)
+│   └── OnlineRetail.xlsx                    ← Dataset used
 │
 ├── code/
-│ └── preprocessing.ipynb ← Main analysis notebook
+│   └── preprocessing.ipynb                  ← Main code notebook
 │
 └── results/
-├── figure3_network_visualization.png ← Fig 3: Network visualization
-├── enhanced_profiles_connectivity.png ← Profile-rule connectivity
-├── customer_segments.png ← K-Means segments (k=4)
-├── optimal_k_analysis.png ← Elbow + Silhouette plot
-├── table1_association_rules.csv ← Apriori rules (26 rules)
-└── final_summary_profiles.csv ← Customer profiles table
+    ├── figure3_replication_results.png      ← Fig 3: Replication network
+    ├── figure3_network_visualization.png    ← Fig 3: Enhanced network
+    ├── enhanced_profiles_connectivity.png   ← Profile-rule connectivity
+    ├── customer_segments.png                ← K-Means segments (k=4)
+    ├── optimal_k_analysis.png               ← Elbow + Silhouette plot
+    ├── rules_fpgrowth.csv                   ← Association rules table
+    └── final_summary_profiles.csv           ← Customer profiles table
+```
+
+---
+
+## 🚀 How to Run
+
+### Prerequisites
+- Python 3
+- Jupyter Notebook or Google Colab
+- Libraries: `pandas`, `mlxtend`, `scikit-learn`, 
+`matplotlib`, `networkx`, `openpyxl`
+
+### Install dependencies
+```bash
+pip install pandas mlxtend scikit-learn matplotlib networkx openpyxl
+```
+
+### Steps
+1. Download or clone this repository
+2. Open `code/preprocessing.ipynb` in Jupyter Notebook or Google Colab
+3. Make sure `dataset/OnlineRetail.xlsx` is accessible
+4. Run all cells in order
+
+---
+
+## 📚 Dependencies
+- `pandas` — data processing
+- `mlxtend` — FP-Growth / Apriori algorithm
+- `scikit-learn` — K-Means clustering
+- `matplotlib` — plotting
+- `networkx` — network graph (Figure 3)
+- `openpyxl` — reading Excel files
